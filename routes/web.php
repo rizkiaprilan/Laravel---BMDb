@@ -17,6 +17,11 @@ Route::get('/admin', function () {
 Route::get('/member', function () {
     return view('layouts/masterMember');
 });
+Route::get('/guest', function () {
+    return view('layouts/masterGuest');
+});
+
+
 
 Auth::routes();
 

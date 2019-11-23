@@ -8,11 +8,12 @@
                     <div class="card-header">{{ __('Register') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-3 col-form-label text-md-right"></label>
+                                <label for="name"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Fullname') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -29,7 +30,8 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="email" class="col-md-3 col-form-label text-md-right"></label>
+                                <label for="email"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -45,7 +47,8 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-3 col-form-label text-md-right"></label>
+                                <label for="password"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -61,7 +64,8 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-3 col-form-label text-md-right"></label>
+                                <label for="password-confirm"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Password Confirm') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
@@ -71,7 +75,8 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-3 col-form-label text-md-right"></label>
+                                <label for="gender"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
 
                                 <div class="col-md-6">
 
@@ -87,7 +92,8 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-3 col-form-label text-md-right"></label>
+                                <label for="address"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
 
                                 <div class="col-md-6">
                                     <textarea placeholder="Address" id="address"
@@ -101,36 +107,29 @@
                                 </div>
                             </div>
 
-                            {{--                            <div class="form-group row">--}}
-                            {{--                                <label for="password" class="col-md-3 col-form-label text-md-right"></label>--}}
+                            <div class="form-group row">
+                                <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Date') }}</label>
 
-                            {{--                                <div class="col-md-6">--}}
-                            {{--                                    <div class="input-group">--}}
-                            {{--                                        <div class="input-group-addon">--}}
-                            {{--                                            <i class="fa fa-calendar"></i>--}}
-                            {{--                                        </div>--}}
-                            {{--                                        <input type="text" name="date" class="form-control"--}}
-                            {{--                                               data-inputmask="'alias': 'dd/mm/yyyy'" data-mask--}}
-                            {{--                                               placeholder="dd/mm/yyyy">--}}
-                            {{--                                    </div>--}}
-                            {{--                                    <div class="input-group date">--}}
-                            {{--                                        <div class="input-group-addon">--}}
-                            {{--                                            <i class="fa fa-calendar"></i>--}}
-                            {{--                                        </div>--}}
-                            {{--                                        <input type="text" class="form-control pull-right" id="datepicker">--}}
-                            {{--                                    </div>--}}
-
-
-                            {{--                                    @error('date')--}}
-                            {{--                                    <span class="invalid-feedback" role="alert">--}}
-                            {{--                                        <strong>Please fill correctly!</strong>--}}
-                            {{--                                    </span>--}}
-                            {{--                                    @enderror--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="date" name="date" class="form-control"
+                                               data-inputmask="'alias': 'dd/mm/yyyy'" data-mask
+                                               placeholder="dd/mm/yyyy">
+                                    </div>
+                                    @error('date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-3 col-form-label text-md-right"></label>
+                                <label for="photo"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Photo Profile') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="file" type="file" class="form-control" name="photo" required
@@ -145,7 +144,7 @@
                             </div>
 
                             <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-5">
+                                <div class="col-md-6 offset-md-6">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Register') }}
                                     </button>

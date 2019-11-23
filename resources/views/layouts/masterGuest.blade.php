@@ -29,8 +29,8 @@
         <form class="form-inline my-2 my-lg-0 ">
             <label style="color: white" class="mr-auto mr-sm-4">
                 <?php
-                    date_default_timezone_set('Asia/Jakarta');
-                    echo date('d-m-Y H:i:s', time());
+                date_default_timezone_set('Asia/Jakarta');
+                echo date('d-m-Y H:i:s', time());
                 ?>
             </label>
             <a href="{{ route('login') }}" class="mr-auto mr-sm-2" style="color: white; text-decoration: none">Login</a>
@@ -43,7 +43,7 @@
 <br>
 <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
     <div class="container text-center">
-        <small>Copyright &copy; <b style="color: gold">BMDb</b></small>
+        <small>&copy; 2019 Copyright <b style="color: gold">BMDb.com</b>.</small>
     </div>
 </footer>
 <!-- Optional JavaScript -->

@@ -25,25 +25,45 @@
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Comment</a>
+                <a class="nav-link" href="#">List Saved Movie</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Inbox</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">List Saved Movie</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0 ">
             <label style="color: white" class="mr-auto mr-sm-4">
                 <?php
-                    date_default_timezone_set('Asia/Jakarta');
-                    echo date('d-m-Y H:i:s', time());
+                date_default_timezone_set('Asia/Jakarta');
+                echo date('d-m-Y H:i:s', time());
                 ?>
             </label>
-            <a href="#" class="mr-auto mr-sm-2" style="color: white; text-decoration: none">Profile</a>
-            <a href="#" class="mr-auto mr-sm-2  " style="color: white; text-decoration: none">Log Out</a>
 
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
+
+                </ul>
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" style="text-decoration: none" class="nav-link dropdown-toggle" href="#"
+                           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a href="#" class="dropdown-item">Profile</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log
+                                Out</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </form>
     </div>
 </nav>
@@ -52,7 +72,7 @@
 <br>
 <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
     <div class="container text-center">
-        <small>Copyright &copy; <b style="color: gold">BMDb</b></small>
+        <small>&copy; 2019 Copyright <b style="color: gold">BMDb.com</b>.</small>
     </div>
 </footer>
 <!-- Optional JavaScript -->

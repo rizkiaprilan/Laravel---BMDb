@@ -72,7 +72,7 @@ class RegisterController extends Controller
         $request = request();
         $profileImage = $request->file('photo');
         $new_name = time().'-.'. $profileImage->getClientOriginalExtension();
-        $dest = storage_path('app/public/memberPicture');
+        $dest = storage_path('app/public/UserPicture');
         $profileImage->move($dest,$new_name);
 
         $user = User::create([

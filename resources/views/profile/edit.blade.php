@@ -1,7 +1,7 @@
-@extends('layouts.masterGuest')
+@extends($layout)
 
 @section('title')
-    Register
+    BMDb | Edit Profile
 @endsection
 
 @section('content')
@@ -9,11 +9,15 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
+                    <div class="card-header">Edit Profile</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                            @csrf
+                        <form method="POST" action="/profile" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_method" value="PUT">
+                                <input type="hidden" name="id" value="{{$data->id}}">
+                            </div>
 
                             <div class="form-group row">
                                 <label for="name"
@@ -22,7 +26,7 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                            class="form-control @error('name') is-invalid @enderror" name="name"
-                                           value="{{ old('name') }}" required autocomplete="name" autofocus
+                                           value="{{ $data->name }}" required autocomplete="name" autofocus
                                            placeholder="Fullname">
 
                                     @error('name')
@@ -40,7 +44,7 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                            class="form-control @error('email') is-invalid @enderror" name="email"
-                                           value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
+                                           value="{{ $data->email }}" required autocomplete="email" placeholder="Email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -102,10 +106,11 @@
                                 <div class="col-md-6">
                                     <textarea placeholder="Address" id="address"
                                               class="form-control @error('address') is-invalid @enderror" name="address"
+                                              value="{{ $data->address }}"
                                               required></textarea>
                                     @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                    <span class=" invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
@@ -121,12 +126,12 @@
                                         </div>
                                         <input type="date" name="date" class="form-control"
                                                data-inputmask="'alias': 'dd/mm/yyyy'" data-mask
-                                               placeholder="dd/mm/yyyy">
+                                               placeholder="dd/mm/yyyy" value="{{ $data->date }}">
                                     </div>
                                     @error('date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>
@@ -137,7 +142,7 @@
 
                                 <div class="col-md-6">
                                     <input id="file" type="file" class="form-control" name="photo" required
-                                           placeholder="Choose File">
+                                           placeholder="Choose File" value="{{$data->photo}}">
 
                                     @error('photo')
                                     <span class="invalid-feedback" role="alert">
@@ -154,10 +159,13 @@
                                     </button>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    </div>
+
 @endsection

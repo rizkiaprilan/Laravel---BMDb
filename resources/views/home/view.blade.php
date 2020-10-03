@@ -13,7 +13,7 @@
                     <table class="table">
                         <tr>
                             <td rowspan="5"><img src="/storage/MoviePicture/{{$data->photo}}" alt="Image"
-                                                 class="img-thumbnail"></td>
+                                                 style="width: 200px; height: auto"></td>
                             <td><a href="">{{$data->title}}</a></td>
                         </tr>
                         <tr>
@@ -33,19 +33,26 @@
                         @foreach($comment as $c)
                             <tr>
                                 <td rowspan="3"><img src="/storage/UserPicture/{{$c->user->photo}}" alt="Image"
-                                                     class="img-thumbnail"></td>
+                                                     style="width: 150px; height: auto; border-radius: 50%;"></td>
                                 </td>
                                 <td>
-                                    <a href="/profile/view/{{$c->user->id}}"
-                                       style="text-decoration: none">{{$c->user->name}}</a>
+                                    @if(Auth::user() != null)
+                                        <a href="/profile/view/{{$c->user->id}}"
+                                           style="text-decoration: none">{{$c->user->name}}</a>
+                                    @else
+                                        <a href="{{ route('login') }}"
+                                           style="text-decoration: none">{{$c->user->name}}</a>
+                                    @endif
                                 </td>
-                                @if( Auth::user()->name == $c->user->name)
-                                    <td>
-                                        <button type="button" class="btn btn-danger"><a
-                                                href="/home/delete/{{$c->id}}"
-                                                style="text-decoration: none; color: white">Delete</a>
-                                        </button>
-                                    </td>
+                                @if(Auth::user() != null)
+                                    @if( Auth::user()->name == $c->user->name)
+                                        <td>
+                                            <button type="button" class="btn btn-danger"><a
+                                                    href="/home/delete/{{$c->id}}"
+                                                    style="text-decoration: none; color: white">Delete</a>
+                                            </button>
+                                        </td>
+                                    @endif
                                 @endif
                             </tr>
                             <tr>
@@ -56,35 +63,37 @@
                             </tr>
                         @endforeach
                     </table>
-                    <table>
-                        <tr>
-                            <form method="POST" action="/home" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group row">
-                                    <div class="col-md-10 offset-md-1 ">
+                    @if(Auth::user() != null)
+                        <table>
+                            <tr>
+                                <form method="POST" action="/home" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group row">
+                                        <div class="col-md-10 offset-md-1 ">
                                     <textarea placeholder="Comment" id="comment"
                                               class="form-control @error('comment') is-invalid @enderror" name="comment"
                                               required></textarea>
-                                        @error('comment')
-                                        <span class="invalid-feedback" role="alert">
+                                            @error('comment')
+                                            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                        @enderror
-                                    </div>
+                                            @enderror
+                                        </div>
 
-                                </div>
-                                <input type="hidden" name="movie_id" value="{{$data->id}}">
-                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-6 offset-md-5">
-                                        <button type="submit" class="btn btn-primary">
-                                            Submit
-                                        </button>
                                     </div>
-                                </div>
-                            </form>
-                        </tr>
-                    </table>
+                                    <input type="hidden" name="movie_id" value="{{$data->id}}">
+                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                    <div class="form-group row mb-0">
+                                        <div class="col-md-6 offset-md-5">
+                                            <button type="submit" class="btn btn-primary">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </tr>
+                        </table>
+                    @endif
                 </div>
             </div>
         </div>

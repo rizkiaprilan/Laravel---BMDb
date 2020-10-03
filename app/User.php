@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,10 +16,12 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'users';
     protected $fillable = [
         'name', 'email', 'password', 'gender', 'address','photo','role','date'
     ];
-
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -41,5 +44,8 @@ class User extends Authenticatable
     }
     public  function  message(){
         return $this->hasOne('App\Message');  //one to many
+    }
+    public  function  bookmark(){
+        return $this->hasMany('App\Bookmark');  //one to many
     }
 }

@@ -9,43 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileControllers extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function view($id)
     {
         $data = User::where('id','=',$id)->first();
@@ -99,6 +62,17 @@ class ProfileControllers extends Controller
      */
     public function update(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed', 'alpha_num'],
+            'gender' => ['required'],
+            'address' => ['required', 'string'],
+            'role' => ['required', 'string'],
+            'date' => ['required', 'date'],
+            'photo' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg'],
+        ]);
+
         $profileImage = $request->file('photo');
         $new_name = time().'-.'. $profileImage->getClientOriginalExtension();
         $dest = storage_path('app/public/UserPicture');
@@ -115,17 +89,7 @@ class ProfileControllers extends Controller
                 'date' => $request->date,
                 'photo' => $new_name,
             ]);
-        return redirect('/');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $user = User::where('id', '=', $request->id)->first();
+        return redirect('/profile/view/'.$user->id);
     }
 }

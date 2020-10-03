@@ -1,7 +1,7 @@
 @extends($layout)
 
 @section('title')
-    BMDb | {{$data->title}}
+    BMDb | {{$data->name}}
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
                     <table class="table">
                         <tr>
                             <td rowspan="3"><img src="/storage/UserPicture/{{$data->photo}}" alt="Image"
-                                                 style="width: 130px; height: auto"></td>
+                                                 style="width: 150px; height: auto; border-radius: 50%;"></td>
                             <td><a href="">{{$data->name}}</a></td>
                             <td>
                                 @if(Auth::user()->name == $data->name)
@@ -49,11 +49,11 @@
                                     </div>
 
                                 </div>
-{{--                                <input type="hidden" name="movie_id" value="{{$data->id}}">--}}
+                                {{--                                <input type="hidden" name="movie_id" value="{{$data->id}}">--}}
                                 <input type="hidden" name="user_id" value="{{ $data->id }}">
-                                <input type="hidden" name="receiver" value= "{{Auth::user()->id}}">
-                                <input type="hidden" name="name" value= "{{Auth::user()->name}}">
-                                <input type="hidden" name="photo" value= "{{Auth::user()->photo}}">
+                                <input type="hidden" name="receiver" value="{{Auth::user()->id}}">
+                                <input type="hidden" name="name" value="{{Auth::user()->name}}">
+                                <input type="hidden" name="photo" value="{{Auth::user()->photo}}">
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-5">
                                         <button type="submit" class="btn btn-primary">
